@@ -1,28 +1,24 @@
-#Resumen
+# Summary
+Cloud TTS is a solution to the problem of converting text in a PDF into an audiobook.
 
-Cloud TTS es una solución al problema de convertir un texto en PDF a un audiolibro.
+It uses a Coqui TTS image on Google Cloud to create multiple Google Cloud Run jobs. These jobs process segments of the PDF text and convert their respective parts into WAV audio files. Finally, the audio segments are stored in a Google Cloud Bucket, downloaded, and merged using Python.
 
-Utiliza una imagen de Coqui TTS en Google Cloud para crear multiples Google Cloud run jobs. Estos ultimos, trabajan en segmentos
-de texto del PDF y convierten sus respectivas partes a audios WAV. Por ultimo, se almacenan los segmentos de audio en un Google Cloud Bucket, se descargan y se
-juntan utilizando Python.
+Parallelization, communication, and unification of the final product are managed by a master node running pdfreader2.py.
 
-La paralelización, comunicación y unificación del producto fianl se realiza por un nodo maestro que ejecuta el pdfreader2.py.
+The user has the option to control:
 
-Por ultimo, el usuario tiene las opciones de controlar:
+The number of sentences each job processes.
+The names of the respective jobs and files.
+However, CLOUDTTS will always attempt to maximize the number of jobs based on the total number of sentences divided by the number of sentences per job. Therefore, there is a limit to the number of pages that can be processed, depending on the number of sentences per job, due to Google Cloud's restrictions on the number of jobs that can be created per minute.
 
-* El numero de frases que cada Job procesa
-* Los nombres de los respectivos trabajos y archivos
+To address this issue, you can either increase the number of sentences per job or limit the number of pages processed per minute.
 
-Sin embargo, CLOUDTTS siempre intentará escalar al maximo el numero de Jobs dado el numero de frases dividido entre el numero de frases por job. 
-Por lo tanto, existe un limite de alrededor de paginas dependiendo del numero de frases que se utilize por Job debido a que Google Cloud limita el numero
-de jobs que se pueden crear por minuto.
+# Installation
+You will need a Google Cloud project, an available bucket, and credentials on your machine. You'll need to provide the project ID, the name of the bucket where data will be stored, specify the name of the PDF file to convert, the number of sentences per page (recommended 5–20), the job name (any unique string), and the pages you want to convert to audio (start and end pages). For details on how to provide the necessary credentials, visit:
+[Google Workspace: Create Credentials](https://developers.google.com/workspace/guides/create-credentials)
+[Google Cloud: Provide Credentials ADC](https://cloud.google.com/docs/authentication)
+To run the master node you will need:
 
-Para abordar este problema, se puede incrementar el numero de frases por Job ó limitar la cantidad de paginas por minuto que se procesan.
-
-##Instalación
-
-Vas a necesitar un projecto en Google Cloud, un bucket disponible y las credenciales en tu computadora.
-Vas a ingresar el ID del projecto, el nombre del bucket donde se va almacenar la data, especificar el nombre del archivo PDF que deseas convertir, el numero de frases por pagina (se recomienda 5-20), el nombre del job (puede ser cualquier frase con tal de que solo exista una vez), y las paginas que quieres convertir a audio (pagina de inicio y pagina de fin). Para ver como ingresar las credenciales necesarias por favor mirar https://developers.google.com/workspace/guides/create-credentials y https://cloud.google.com/docs/authentication/provide-credentials-adc.
 ```
 pip install -r requirements.txt
 python pdfreader2.py
