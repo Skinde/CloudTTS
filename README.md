@@ -15,8 +15,11 @@ To address this issue, you can either increase the number of sentences per job o
 
 # Installation
 You will need a Google Cloud project, an available bucket, and credentials on your machine. You'll need to provide the project ID, the name of the bucket where data will be stored, specify the name of the PDF file to convert, the number of sentences per page (recommended 5–20), the job name (any unique string), and the pages you want to convert to audio (start and end pages). For details on how to provide the necessary credentials, visit:
+
 [Google Workspace: Create Credentials](https://developers.google.com/workspace/guides/create-credentials)
+
 [Google Cloud: Provide Credentials ADC](https://cloud.google.com/docs/authentication)
+
 To run the master node you will need:
 
 ```
