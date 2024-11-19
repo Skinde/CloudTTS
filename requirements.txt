@@ -1,0 +1,5 @@
+protobuf==5.28.3
+pydub==0.25.1
+pyenchant==3.2.2
+PyPDF2==3.0.1
+pyspellchecker==0.8.1
