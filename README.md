@@ -7,8 +7,9 @@ Parallelization, communication, and unification of the final product are managed
 
 The user has the option to control:
 
-The number of sentences each job processes.
-The names of the respective jobs and files.
+* The number of sentences each job processes.
+*The names of the respective jobs and files.
+
 However, CLOUDTTS will always attempt to maximize the number of jobs based on the total number of sentences divided by the number of sentences per job. Therefore, there is a limit to the number of pages that can be processed, depending on the number of sentences per job, due to Google Cloud's restrictions on the number of jobs that can be created per minute.
 
 To address this issue, you can either increase the number of sentences per job or limit the number of pages processed per minute.
